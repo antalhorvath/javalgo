@@ -3,6 +3,7 @@ package com.vathevor.javalgo.general;
 import java.util.Arrays;
 
 /**
+ * #easy
  * Given an array of integers sorted in non-decreasing order.
  * Return an array of the squares of each number, also in sorted non-decreasing order.
  */
