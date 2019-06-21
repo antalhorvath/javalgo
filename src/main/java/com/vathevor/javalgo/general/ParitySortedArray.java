@@ -8,7 +8,17 @@ package com.vathevor.javalgo.general;
  */
 public class ParitySortedArray {
 
-    static int[] getArraySortedByParity(int[] elements) {
-        return null;
+    static int[] getArraySortedByParity(int[] input) {
+        int head = 0;
+        int tail = input.length - 1;
+        int[] output = new int[input.length];
+        for (int element : input) {
+            if (element % 2 == 0) {
+                output[head++] = element;
+            } else {
+                output[tail--] = element;
+            }
+        }
+        return output;
     }
 }
