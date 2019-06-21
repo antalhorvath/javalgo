@@ -4,6 +4,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * #easy
+ *
  * Write a program that concatenates the numbers from 1 to 'length' into a string.
  * But for multiples of three concatenate “Fizz” instead of the number
  * and for the multiples of five concatenate “Buzz”.
