@@ -1,5 +1,7 @@
 package com.vathevor.javalgo.general;
 
+import java.util.Arrays;
+
 /**
  * Given an array of integers sorted in non-decreasing order.
  * Return an array of the squares of each number, also in sorted non-decreasing order.
@@ -7,6 +9,13 @@ package com.vathevor.javalgo.general;
 public class SquaresOfSortedArray {
 
     static int[] sortedSquares(int[] elements) {
-        return null;
+        int[] result = new int[elements.length];
+
+        for (int i = 0; i < elements.length; i++) {
+            result[i] = elements[i] * elements[i];
+        }
+
+        Arrays.sort(result);
+        return result;
     }
 }
