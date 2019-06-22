@@ -1,4 +1,4 @@
-package com.vathevor.javalgo.general.candidatesum;
+package com.vathevor.javalgo.dp.candidatesum;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

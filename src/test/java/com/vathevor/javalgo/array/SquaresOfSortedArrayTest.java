@@ -1,4 +1,4 @@
-package com.vathevor.javalgo.general;
+package com.vathevor.javalgo.array;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
