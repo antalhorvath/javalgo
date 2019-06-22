@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BstValidatorTest {
+class BstUtilTest {
 
     @Test
     void shouldBeValid() {
@@ -18,7 +18,7 @@ class BstValidatorTest {
         TreeNode<Integer> right = new TreeNode<>(6, leftOfRight, rightOfRight);
         TreeNode<Integer> root = new TreeNode<>(4, left, right);
 
-        boolean valid = BstValidator.isValid(root);
+        boolean valid = BstUtil.isValid(root);
 
         assertTrue(valid);
     }
@@ -31,7 +31,7 @@ class BstValidatorTest {
         TreeNode<Integer> right = new TreeNode<>(4, leftOf4, rightOf4);
         TreeNode<Integer> root = new TreeNode<>(5, left, right);
 
-        boolean valid = BstValidator.isValid(root);
+        boolean valid = BstUtil.isValid(root);
 
         assertFalse(valid);
     }
