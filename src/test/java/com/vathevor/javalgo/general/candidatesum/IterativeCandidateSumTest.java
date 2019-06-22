@@ -10,9 +10,9 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class DefaultCandidateSumTest {
+class IterativeCandidateSumTest {
 
-    private CandidateSum underTest = new DefaultCandidateSum();
+    private CandidateSum underTest = new IterativeCandidateSum();
 
     @ParameterizedTest
     @MethodSource("testCases")
