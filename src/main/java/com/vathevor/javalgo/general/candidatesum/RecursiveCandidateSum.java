@@ -14,7 +14,6 @@ public class RecursiveCandidateSum implements CandidateSum {
         return result;
     }
 
-
     private void backtrack(List<List<Integer>> result,
                            List<Integer> currentSolution,
                            int[] candidates,

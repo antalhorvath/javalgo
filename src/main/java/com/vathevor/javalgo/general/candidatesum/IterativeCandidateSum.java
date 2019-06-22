@@ -22,8 +22,10 @@ public class IterativeCandidateSum implements CandidateSum {
         List<List<List<Integer>>> allSolutionsForTarget = new ArrayList<>();
         for (int currentTarget = 0; currentTarget <= target; currentTarget++) {
             List<List<Integer>> currentTargetSolutions = new ArrayList<>();
-            for (int j = 0; j < candidates.length && candidates[j] <= currentTarget; j++) {
-                int candidate = candidates[j];
+            for (int candidate: candidates) {
+                if(currentTarget < candidate) {
+                    break;
+                }
                 if (candidate == currentTarget) {
                     currentTargetSolutions.add(singletonList(candidate));
                 } else {
