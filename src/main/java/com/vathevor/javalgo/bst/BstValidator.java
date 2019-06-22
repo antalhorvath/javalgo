@@ -12,6 +12,16 @@ import com.vathevor.javalgo.bst.model.TreeNode;
 public class BstValidator {
 
     static boolean isValid(TreeNode<Integer> root) {
-        return false;
+        return isValid(root, null, null);
+    }
+
+    private static boolean isValid(TreeNode<Integer> node, Integer low, Integer high) {
+        if (node == null) {
+            return true;
+        }
+        return (low == null || low < node.getValue()) &&
+                (high == null || node.getValue() < high) &&
+                isValid(node.getLeft(), low, node.getValue()) &&
+                isValid(node.getRight(), node.getValue(), high);
     }
 }
