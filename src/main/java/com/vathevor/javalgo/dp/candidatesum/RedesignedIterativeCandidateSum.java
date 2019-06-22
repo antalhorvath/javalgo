@@ -8,13 +8,6 @@ import java.util.stream.IntStream;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toCollection;
 
-/**
- * #medium
- * Given a distinct set of numbers (candidates) and a sum number.
- * Find all unique combinations in numbers where the numbers sums to sum.
- * The same repeated number may be chosen unlimited number of times.
- * The solution set must not contain duplicate combinations.
- */
 public class RedesignedIterativeCandidateSum implements CandidateSum {
 
     private static class SumProblem {

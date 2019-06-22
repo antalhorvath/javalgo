@@ -6,13 +6,6 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-/**
- * #medium
- * Given a distinct set of numbers (candidates) and a target number.
- * Find all unique combinations in numbers where the numbers sums to target.
- * The same repeated number may be chosen unlimited number of times.
- * The solution set must not contain duplicate combinations.
- */
 public class IterativeCandidateSum implements CandidateSum {
 
     @Override
@@ -22,8 +15,8 @@ public class IterativeCandidateSum implements CandidateSum {
         List<List<List<Integer>>> allSolutionsForTarget = new ArrayList<>();
         for (int currentTarget = 0; currentTarget <= target; currentTarget++) {
             List<List<Integer>> currentTargetSolutions = new ArrayList<>();
-            for (int candidate: candidates) {
-                if(currentTarget < candidate) {
+            for (int candidate : candidates) {
+                if (currentTarget < candidate) {
                     break;
                 }
                 if (candidate == currentTarget) {
