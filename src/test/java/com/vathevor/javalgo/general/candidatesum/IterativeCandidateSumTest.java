@@ -12,11 +12,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IterativeCandidateSumTest {
 
-    private CandidateSum underTest = new IterativeCandidateSum();
+    private CandidateSum underTest;
 
     @ParameterizedTest
     @MethodSource("testCases")
-    void test(TestCase testCase) {
+    void testIterativeImplementation(TestCase testCase) {
+        underTest = new IterativeCandidateSum();
+
+        List<List<Integer>> output = underTest.combinationSum(testCase.input.integers, testCase.input.target);
+
+        assertTrue(output.containsAll(testCase.expectedOutput));
+    }
+
+    @ParameterizedTest
+    @MethodSource("testCases")
+    void testRecursiveImplementation(TestCase testCase) {
+        underTest = new RecursiveCandidateSum();
+
         List<List<Integer>> output = underTest.combinationSum(testCase.input.integers, testCase.input.target);
 
         assertTrue(output.containsAll(testCase.expectedOutput));
