@@ -98,6 +98,25 @@ public class BstUtil {
      * @return the found TreeNode or null BST does not contain such value
      */
     static TreeNode insert(TreeNode root, int value) {
-        return null;
+        TreeNode node = root;
+        TreeNode parent = root;
+
+        boolean valueGoesLeft = true;
+        while (node != null) {
+            parent = node;
+            valueGoesLeft = value < node.getValue();
+            if (valueGoesLeft) {
+                node = node.getLeft();
+            } else {
+                node = node.getRight();
+            }
+        }
+
+        if (valueGoesLeft) {
+            parent.setLeft(new TreeNode(value));
+        } else {
+            parent.setRight(new TreeNode(value));
+        }
+        return root;
     }
 }
