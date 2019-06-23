@@ -79,6 +79,17 @@ public class BstUtil {
      * @return the found TreeNode or null BST does not contain such value
      */
     static TreeNode search(TreeNode root, int value) {
+        TreeNode node = root;
+        while (node != null) {
+            if (node.getValue().equals(value)) {
+                return node;
+            }
+            if (node.getValue() < value) {
+                node = node.getRight();
+            } else {
+                node = node.getLeft();
+            }
+        }
         return null;
     }
 }
