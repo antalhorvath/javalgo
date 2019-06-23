@@ -89,4 +89,34 @@ public class BstUtil {
         }
         return node;
     }
+
+    /**
+     * Inserts a node into the Binary Search Tree.
+     *
+     * @param root  root of the BST
+     * @param value value of TreeNode to insert
+     * @return the found TreeNode or null BST does not contain such value
+     */
+    static TreeNode insert(TreeNode root, int value) {
+        TreeNode node = root;
+        TreeNode parent = root;
+
+        boolean valueGoesLeft = true;
+        while (node != null) {
+            parent = node;
+            valueGoesLeft = value < node.getValue();
+            if (valueGoesLeft) {
+                node = node.getLeft();
+            } else {
+                node = node.getRight();
+            }
+        }
+
+        if (valueGoesLeft) {
+            parent.setLeft(new TreeNode(value));
+        } else {
+            parent.setRight(new TreeNode(value));
+        }
+        return root;
+    }
 }
