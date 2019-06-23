@@ -1,30 +1,30 @@
 package com.vathevor.javalgo.bst.model;
 
-public class TreeNode<T> {
+public class TreeNode {
 
-    private T value;
-    private TreeNode<T> left;
-    private TreeNode<T> right;
+    private Integer value;
+    private TreeNode left;
+    private TreeNode right;
 
-    public TreeNode(T value) {
+    public TreeNode(Integer value) {
         this.value = value;
     }
 
-    public TreeNode(T value, TreeNode<T> left, TreeNode<T> right) {
+    public TreeNode(Integer value, TreeNode left, TreeNode right) {
         this.value = value;
         this.left = left;
         this.right = right;
     }
 
-    public T getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public TreeNode<T> getLeft() {
+    public TreeNode getLeft() {
         return left;
     }
 
-    public TreeNode<T> getRight() {
+    public TreeNode getRight() {
         return right;
     }
 }

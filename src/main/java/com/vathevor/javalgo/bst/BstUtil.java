@@ -14,11 +14,11 @@ public class BstUtil {
      * @param root the root node of the Binary Search Tree
      * @return the result of the validity check
      */
-    static boolean isValid(TreeNode<Integer> root) {
+    static boolean isValid(TreeNode root) {
         return isValid(root, null, null);
     }
 
-    private static boolean isValid(TreeNode<Integer> node, Integer low, Integer high) {
+    private static boolean isValid(TreeNode node, Integer low, Integer high) {
         if (node == null) {
             return true;
         }
@@ -35,8 +35,8 @@ public class BstUtil {
      * @param node the node whose successor should be returned
      * @return the successor of given node
      */
-    static TreeNode<Integer> getInorderSuccessor(TreeNode<Integer> root, TreeNode<Integer> node) {
-        TreeNode<Integer> successor = null;
+    static TreeNode getInorderSuccessor(TreeNode root, TreeNode node) {
+        TreeNode successor = null;
         while (root != null) {
             if (node.getValue() < root.getValue()) {
                 successor = root;
@@ -56,8 +56,8 @@ public class BstUtil {
      * @param node the node whose successor should be returned
      * @return the successor of given node
      */
-    static TreeNode<Integer> getInorderPredecessor(TreeNode<Integer> root, TreeNode<Integer> node) {
-        TreeNode<Integer> predecessor = null;
+    static TreeNode getInorderPredecessor(TreeNode root, TreeNode node) {
+        TreeNode predecessor = null;
         while (root != null) {
             if (node.getValue().equals(root.getValue())) {
                 root = root.getLeft();

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BstIteratorTest {
 
-    private static final TreeNode<Integer> BST_01_ROOT;
+    private static final TreeNode BST_01_ROOT;
 
     static {
         /*
@@ -19,11 +19,11 @@ class BstIteratorTest {
          *           /  \
          *          9    20
          */
-        TreeNode<Integer> leftOf7 = new TreeNode<>(3);
-        TreeNode<Integer> leftOf15 = new TreeNode<>(9);
-        TreeNode<Integer> rightOf15 = new TreeNode<>(20);
-        TreeNode<Integer> rightOf7 = new TreeNode<>(15, leftOf15, rightOf15);
-        BST_01_ROOT = new TreeNode<>(7, leftOf7, rightOf7);
+        TreeNode leftOf7 = new TreeNode(3);
+        TreeNode leftOf15 = new TreeNode(9);
+        TreeNode rightOf15 = new TreeNode(20);
+        TreeNode rightOf7 = new TreeNode(15, leftOf15, rightOf15);
+        BST_01_ROOT = new TreeNode(7, leftOf7, rightOf7);
     }
 
     @Test

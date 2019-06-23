@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BstUtilTest {
 
-    private static final TreeNode<Integer> NOT_VALID_BST_ROOT;
-    private static final TreeNode<Integer> BST_01_ROOT;
-    private static final TreeNode<Integer> BST_02_ROOT;
-    private static final TreeNode<Integer> BST_03_ROOT;
+    private static final TreeNode NOT_VALID_BST_ROOT;
+    private static final TreeNode BST_01_ROOT;
+    private static final TreeNode BST_02_ROOT;
+    private static final TreeNode BST_03_ROOT;
 
     static {
         /*
@@ -28,11 +28,11 @@ class BstUtilTest {
          *           / \
          *          3   6
          */
-        TreeNode<Integer> left = new TreeNode<>(1);
-        TreeNode<Integer> leftOf4 = new TreeNode<>(3);
-        TreeNode<Integer> rightOf4 = new TreeNode<>(6);
-        TreeNode<Integer> right = new TreeNode<>(4, leftOf4, rightOf4);
-        NOT_VALID_BST_ROOT = new TreeNode<>(5, left, right);
+        TreeNode left = new TreeNode(1);
+        TreeNode leftOf4 = new TreeNode(3);
+        TreeNode rightOf4 = new TreeNode(6);
+        TreeNode right = new TreeNode(4, leftOf4, rightOf4);
+        NOT_VALID_BST_ROOT = new TreeNode(5, left, right);
     }
 
     static {
@@ -43,13 +43,13 @@ class BstUtilTest {
          *       / \   / \
          *      1   3 5   7
          */
-        TreeNode<Integer> leftOfLeft = new TreeNode<>(1);
-        TreeNode<Integer> rightOfLeft = new TreeNode<>(3);
-        TreeNode<Integer> left = new TreeNode<>(2, leftOfLeft, rightOfLeft);
-        TreeNode<Integer> leftOfRight = new TreeNode<>(5);
-        TreeNode<Integer> rightOfRight = new TreeNode<>(7);
-        TreeNode<Integer> right = new TreeNode<>(6, leftOfRight, rightOfRight);
-        BST_01_ROOT = new TreeNode<>(4, left, right);
+        TreeNode leftOfLeft = new TreeNode(1);
+        TreeNode rightOfLeft = new TreeNode(3);
+        TreeNode left = new TreeNode(2, leftOfLeft, rightOfLeft);
+        TreeNode leftOfRight = new TreeNode(5);
+        TreeNode rightOfRight = new TreeNode(7);
+        TreeNode right = new TreeNode(6, leftOfRight, rightOfRight);
+        BST_01_ROOT = new TreeNode(4, left, right);
     }
 
     static {
@@ -62,13 +62,13 @@ class BstUtilTest {
          *         /  \
          *       10    14
          */
-        TreeNode<Integer> leftOf12 = new TreeNode<>(10);
-        TreeNode<Integer> rightOf12 = new TreeNode<>(14);
-        TreeNode<Integer> leftOf8 = new TreeNode<>(4);
-        TreeNode<Integer> rightOf8 = new TreeNode<>(12, leftOf12, rightOf12);
-        TreeNode<Integer> leftOf20 = new TreeNode<>(8, leftOf8, rightOf8);
-        TreeNode<Integer> rightOf20 = new TreeNode<>(22);
-        BST_02_ROOT = new TreeNode<>(20, leftOf20, rightOf20);
+        TreeNode leftOf12 = new TreeNode(10);
+        TreeNode rightOf12 = new TreeNode(14);
+        TreeNode leftOf8 = new TreeNode(4);
+        TreeNode rightOf8 = new TreeNode(12, leftOf12, rightOf12);
+        TreeNode leftOf20 = new TreeNode(8, leftOf8, rightOf8);
+        TreeNode rightOf20 = new TreeNode(22);
+        BST_02_ROOT = new TreeNode(20, leftOf20, rightOf20);
     }
 
     static {
@@ -79,13 +79,13 @@ class BstUtilTest {
          *       / \    /  \
          *      8  12  16  25
          */
-        TreeNode<Integer> leftOf10 = new TreeNode<>(8);
-        TreeNode<Integer> rightOf10 = new TreeNode<>(12);
-        TreeNode<Integer> leftOf15 = new TreeNode<>(10, leftOf10, rightOf10);
-        TreeNode<Integer> leftOf20 = new TreeNode<>(16);
-        TreeNode<Integer> rightOf20 = new TreeNode<>(25);
-        TreeNode<Integer> rightOf15 = new TreeNode<>(20, leftOf20, rightOf20);
-        BST_03_ROOT = new TreeNode<>(15, leftOf15, rightOf15);
+        TreeNode leftOf10 = new TreeNode(8);
+        TreeNode rightOf10 = new TreeNode(12);
+        TreeNode leftOf15 = new TreeNode(10, leftOf10, rightOf10);
+        TreeNode leftOf20 = new TreeNode(16);
+        TreeNode rightOf20 = new TreeNode(25);
+        TreeNode rightOf15 = new TreeNode(20, leftOf20, rightOf20);
+        BST_03_ROOT = new TreeNode(15, leftOf15, rightOf15);
     }
 
     @Test
@@ -104,9 +104,9 @@ class BstUtilTest {
 
     @Test
     void shouldReturnTheNodeWithValueTwoAs() {
-        TreeNode<Integer> node = new TreeNode<>(1);
+        TreeNode node = new TreeNode(1);
 
-        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderSuccessor(BST_01_ROOT, node);
+        TreeNode inorderSuccessor = BstUtil.getInorderSuccessor(BST_01_ROOT, node);
 
         assertEquals(2, inorderSuccessor.getValue());
     }
@@ -118,9 +118,9 @@ class BstUtilTest {
     @ParameterizedTest
     @MethodSource("inorderSuccessorTestCases")
     void shouldReturnInorderSuccessor(TestCase testCase) {
-        TreeNode<Integer> node = new TreeNode<>(testCase.nodeValue);
+        TreeNode node = new TreeNode(testCase.nodeValue);
 
-        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderSuccessor(BST_02_ROOT, node);
+        TreeNode inorderSuccessor = BstUtil.getInorderSuccessor(BST_02_ROOT, node);
 
         assertEquals(testCase.expectedResult, inorderSuccessor.getValue());
     }
@@ -155,9 +155,9 @@ class BstUtilTest {
     @ParameterizedTest
     @MethodSource("bst02InorderPredecessorTestCases")
     void givenBst02_whenGetInorderPredecessor_thenReturnExpectedValue(TestCase testCase) {
-        TreeNode<Integer> node = new TreeNode<>(testCase.nodeValue);
+        TreeNode node = new TreeNode(testCase.nodeValue);
 
-        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderPredecessor(BST_02_ROOT, node);
+        TreeNode inorderSuccessor = BstUtil.getInorderPredecessor(BST_02_ROOT, node);
 
         assertEquals(testCase.expectedResult, inorderSuccessor.getValue());
     }
@@ -172,9 +172,9 @@ class BstUtilTest {
     @ParameterizedTest
     @MethodSource("bst03InorderPredecessorTestCases")
     void givenBst03_whenGetInorderPredecessor_thenReturnExpectedValue(TestCase testCase) {
-        TreeNode<Integer> node = new TreeNode<>(testCase.nodeValue);
+        TreeNode node = new TreeNode(testCase.nodeValue);
 
-        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderPredecessor(BST_03_ROOT, node);
+        TreeNode inorderSuccessor = BstUtil.getInorderPredecessor(BST_03_ROOT, node);
 
         if (isNull(testCase.expectedResult)) {
             assertNull(inorderSuccessor);
