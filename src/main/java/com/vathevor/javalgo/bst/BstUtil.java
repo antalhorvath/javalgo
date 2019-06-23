@@ -89,4 +89,15 @@ public class BstUtil {
         }
         return node;
     }
+
+    /**
+     * Inserts a node into the Binary Search Tree.
+     *
+     * @param root  root of the BST
+     * @param value value of TreeNode to insert
+     * @return the found TreeNode or null BST does not contain such value
+     */
+    static TreeNode insert(TreeNode root, int value) {
+        return null;
+    }
 }

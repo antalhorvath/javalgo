@@ -206,4 +206,21 @@ class BstUtilTest {
         TreeNode node = BstUtil.search(BST_02_ROOT, value);
         assertNull(node);
     }
+
+    @Test
+    void givenBst_whenInsert_thenOk() {
+        TreeNode root = new TreeNode(4);
+        BstUtil.insert(root, 2);
+        assertTrue(BstUtil.isValid(root));
+        BstUtil.insert(root, 6);
+        assertTrue(BstUtil.isValid(root));
+        BstUtil.insert(root, 1);
+        assertTrue(BstUtil.isValid(root));
+        BstUtil.insert(root, 3);
+        assertTrue(BstUtil.isValid(root));
+        BstUtil.insert(root, 5);
+        assertTrue(BstUtil.isValid(root));
+        BstUtil.insert(root, 7);
+        assertTrue(BstUtil.isValid(root));
+    }
 }
