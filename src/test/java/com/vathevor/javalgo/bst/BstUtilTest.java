@@ -2,6 +2,10 @@ package com.vathevor.javalgo.bst;
 
 import com.vathevor.javalgo.bst.model.TreeNode;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -56,7 +60,7 @@ class BstUtilTest {
     }
 
     @Test
-    void shouldReturnTheNodeWithValueTwo() {
+    void shouldReturnTheNodeWithValueTwoAs() {
         TreeNode<Integer> root = createValidBinarySearchTree();
         TreeNode<Integer> node = new TreeNode<>(1);
 
@@ -64,4 +68,60 @@ class BstUtilTest {
 
         assertEquals(2, inorderSuccessor.getValue());
     }
+
+    /*
+    In Binary Search Tree, Inorder Successor of an input node can also be defined as
+    the node with the smallest key greater than the key of input node.
+     */
+    @ParameterizedTest
+    @MethodSource("inorderSuccessorTestCases")
+    void shouldReturnInorderSuccessor(TestCase testCase) {
+        TreeNode<Integer> root = createAnotherValidBinarySearchTree();
+        TreeNode<Integer> node = new TreeNode<>(testCase.nodeValue);
+
+        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderSuccessor(root, node);
+
+        assertEquals(testCase.expectedInorderSuccessor, inorderSuccessor.getValue());
+    }
+
+    private static class TestCase {
+        int nodeValue;
+        int expectedInorderSuccessor;
+
+        private TestCase(int nodeValue, int expectedInorderSuccessor) {
+            this.nodeValue = nodeValue;
+            this.expectedInorderSuccessor = expectedInorderSuccessor;
+        }
+
+        static TestCase of(int nodeValue, int expectedInorderSuccessor) {
+            return new TestCase(nodeValue, expectedInorderSuccessor);
+        }
+    }
+
+    static Stream<TestCase> inorderSuccessorTestCases() {
+        return Stream.of(
+                TestCase.of(8, 10),
+                TestCase.of(10, 12),
+                TestCase.of(14, 20));
+    }
+
+    /*
+            20
+           /  \
+          8    22
+         / \
+        4   12
+           /  \
+         10    14
+     */
+    private TreeNode<Integer> createAnotherValidBinarySearchTree() {
+        TreeNode<Integer> leftOf12 = new TreeNode<>(10);
+        TreeNode<Integer> rightOf12 = new TreeNode<>(14);
+        TreeNode<Integer> leftOf8 = new TreeNode<>(4);
+        TreeNode<Integer> rightOf8 = new TreeNode<>(12, leftOf12, rightOf12);
+        TreeNode<Integer> leftOf20 = new TreeNode<>(8, leftOf8, rightOf8);
+        TreeNode<Integer> rightOf20 = new TreeNode<>(22);
+        return new TreeNode<>(20, leftOf20, rightOf20);
+    }
+
 }
