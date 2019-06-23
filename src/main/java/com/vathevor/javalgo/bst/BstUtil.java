@@ -57,6 +57,17 @@ public class BstUtil {
      * @return the successor of given node
      */
     static TreeNode<Integer> getInorderPredecessor(TreeNode<Integer> root, TreeNode<Integer> node) {
-       return null;
+        TreeNode<Integer> predecessor = null;
+        while (root != null) {
+            if (node.getValue().equals(root.getValue())) {
+                root = root.getLeft();
+            } else if (node.getValue() < root.getValue()) {
+                root = root.getLeft();
+            } else {
+                predecessor = root;
+                root = root.getRight();
+            }
+        }
+        return predecessor;
     }
 }
