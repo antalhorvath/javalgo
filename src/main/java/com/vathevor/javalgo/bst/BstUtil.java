@@ -80,16 +80,13 @@ public class BstUtil {
      */
     static TreeNode search(TreeNode root, int value) {
         TreeNode node = root;
-        while (node != null) {
-            if (node.getValue().equals(value)) {
-                return node;
-            }
-            if (node.getValue() < value) {
-                node = node.getRight();
-            } else {
+        while (node != null && !node.getValue().equals(value)) {
+            if (value < node.getValue()) {
                 node = node.getLeft();
+            } else {
+                node = node.getRight();
             }
         }
-        return null;
+        return node;
     }
 }
