@@ -29,7 +29,7 @@ public class BstUtil {
     }
 
     /**
-     * Determines the successor of h given node in the Binary Search Tree.
+     * Determines the successor of the given node in the Binary Search Tree.
      *
      * @param root the root node of the Binary Search Tree
      * @param node the node whose successor should be returned
