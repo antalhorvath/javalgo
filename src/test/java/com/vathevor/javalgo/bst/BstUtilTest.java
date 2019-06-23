@@ -4,12 +4,14 @@ import com.vathevor.javalgo.bst.model.TreeNode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
 import static java.util.Objects.isNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -188,5 +190,20 @@ class BstUtilTest {
                 TestCase.of(8, null),
                 TestCase.of(10, 8),
                 TestCase.of(20, 16));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {4, 8, 10, 12, 14, 20, 22})
+    void givenBst02_whenSearch_thenValueIsFound(int value) {
+        TreeNode node = BstUtil.search(BST_02_ROOT, value);
+        assertNotNull(node);
+        assertEquals(value, node.getValue());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {5, 7, 11, 13, 15, 21, 23})
+    void givenBst02_whenSearch_thenValueIsNotFound(int value) {
+        TreeNode node = BstUtil.search(BST_02_ROOT, value);
+        assertNull(node);
     }
 }

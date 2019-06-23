@@ -50,7 +50,7 @@ public class BstUtil {
 
 
     /**
-     * Determines the predecessor of thh given node in the Binary Search Tree.
+     * Determines the predecessor of the given node in the Binary Search Tree.
      *
      * @param root the root node of the Binary Search Tree
      * @param node the node whose successor should be returned
@@ -69,5 +69,16 @@ public class BstUtil {
             }
         }
         return predecessor;
+    }
+
+    /**
+     * Finds the TreeNode by value in the Binary Search Tree.
+     *
+     * @param root  root of the BST
+     * @param value value of TreeNode to find
+     * @return the found TreeNode or null BST does not contain such value
+     */
+    static TreeNode search(TreeNode root, int value) {
+        return null;
     }
 }
