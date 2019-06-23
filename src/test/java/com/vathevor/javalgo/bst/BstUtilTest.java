@@ -18,6 +18,13 @@ class BstUtilTest {
         assertTrue(valid);
     }
 
+    /*
+             4
+           /   \
+          2     6
+         / \   / \
+        1   3 5   7
+     */
     private TreeNode<Integer> createValidBinarySearchTree() {
         TreeNode<Integer> leftOfLeft = new TreeNode<>(1);
         TreeNode<Integer> rightOfLeft = new TreeNode<>(3);
@@ -28,6 +35,13 @@ class BstUtilTest {
         return new TreeNode<>(4, left, right);
     }
 
+    /*
+         5
+       /   \
+      1     4
+           / \
+          3   6
+    */
     @Test
     void shouldBeInvalid() {
         TreeNode<Integer> left = new TreeNode<>(1);
