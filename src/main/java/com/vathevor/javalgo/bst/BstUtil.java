@@ -36,6 +36,15 @@ public class BstUtil {
      * @return the successor of given node
      */
     static TreeNode<Integer> getInorderSuccessor(TreeNode<Integer> root, TreeNode<Integer> node) {
-        return null;
+        TreeNode<Integer> successor = null;
+        while (root != null) {
+            if (node.getValue() < root.getValue()) {
+                successor = root;
+                root = root.getLeft();
+            } else {
+                root = root.getRight();
+            }
+        }
+        return successor;
     }
 }
