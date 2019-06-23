@@ -18,6 +18,7 @@ class BstUtilTest {
     private static final TreeNode<Integer> NOT_VALID_BST_ROOT;
     private static final TreeNode<Integer> BST_01_ROOT;
     private static final TreeNode<Integer> BST_02_ROOT;
+    private static final TreeNode<Integer> BST_03_ROOT;
 
     static {
         /*
@@ -68,6 +69,23 @@ class BstUtilTest {
         TreeNode<Integer> leftOf20 = new TreeNode<>(8, leftOf8, rightOf8);
         TreeNode<Integer> rightOf20 = new TreeNode<>(22);
         BST_02_ROOT = new TreeNode<>(20, leftOf20, rightOf20);
+    }
+
+    static {
+        /*
+         *           15
+         *         /    \
+         *       10      20
+         *       / \    /  \
+         *      8  12  16  25
+         */
+        TreeNode<Integer> leftOf10 = new TreeNode<>(8);
+        TreeNode<Integer> rightOf10 = new TreeNode<>(12);
+        TreeNode<Integer> leftOf15 = new TreeNode<>(10, leftOf10, rightOf10);
+        TreeNode<Integer> leftOf20 = new TreeNode<>(16);
+        TreeNode<Integer> rightOf20 = new TreeNode<>(25);
+        TreeNode<Integer> rightOf15 = new TreeNode<>(20, leftOf20, rightOf20);
+        BST_03_ROOT = new TreeNode<>(15, leftOf15, rightOf15);
     }
 
     @Test
@@ -131,17 +149,44 @@ class BstUtilTest {
 
 
     /*
-            20
-           /  \
+    In Binary Search Tree, Inorder Predecessor of an input node can also be defined as
+    the node with the greater key less than the key of input node.
      */
-    private TreeNode<Integer> createAnotherValidBinarySearchTree() {
-        TreeNode<Integer> leftOf12 = new TreeNode<>(10);
-        TreeNode<Integer> rightOf12 = new TreeNode<>(14);
-        TreeNode<Integer> leftOf8 = new TreeNode<>(4);
-        TreeNode<Integer> rightOf8 = new TreeNode<>(12, leftOf12, rightOf12);
-        TreeNode<Integer> leftOf20 = new TreeNode<>(8, leftOf8, rightOf8);
-        TreeNode<Integer> rightOf20 = new TreeNode<>(22);
-        return new TreeNode<>(20, leftOf20, rightOf20);
+    @ParameterizedTest
+    @MethodSource("bst02InorderPredecessorTestCases")
+    void givenBst02_whenGetInorderPredecessor_thenReturnExpectedValue(TestCase testCase) {
+        TreeNode<Integer> node = new TreeNode<>(testCase.nodeValue);
+
+        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderPredecessor(BST_02_ROOT, node);
+
+        assertEquals(testCase.expectedResult, inorderSuccessor.getValue());
     }
 
+    static Stream<TestCase> bst02InorderPredecessorTestCases() {
+        return Stream.of(
+                TestCase.of(10, 8),
+                TestCase.of(12, 10),
+                TestCase.of(20, 14));
+    }
+
+    @ParameterizedTest
+    @MethodSource("bst03InorderPredecessorTestCases")
+    void givenBst03_whenGetInorderPredecessor_thenReturnExpectedValue(TestCase testCase) {
+        TreeNode<Integer> node = new TreeNode<>(testCase.nodeValue);
+
+        TreeNode<Integer> inorderSuccessor = BstUtil.getInorderPredecessor(BST_03_ROOT, node);
+
+        if (isNull(testCase.expectedResult)) {
+            assertNull(inorderSuccessor);
+        } else {
+            assertEquals(testCase.expectedResult, inorderSuccessor.getValue());
+        }
+    }
+
+    static Stream<TestCase> bst03InorderPredecessorTestCases() {
+        return Stream.of(
+                TestCase.of(8, null),
+                TestCase.of(10, 8),
+                TestCase.of(20, 16));
+    }
 }

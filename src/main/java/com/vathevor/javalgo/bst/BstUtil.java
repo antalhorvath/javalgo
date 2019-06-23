@@ -47,4 +47,16 @@ public class BstUtil {
         }
         return successor;
     }
+
+
+    /**
+     * Determines the predecessor of thh given node in the Binary Search Tree.
+     *
+     * @param root the root node of the Binary Search Tree
+     * @param node the node whose successor should be returned
+     * @return the successor of given node
+     */
+    static TreeNode<Integer> getInorderPredecessor(TreeNode<Integer> root, TreeNode<Integer> node) {
+       return null;
+    }
 }
