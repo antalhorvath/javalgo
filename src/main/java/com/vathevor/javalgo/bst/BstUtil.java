@@ -119,4 +119,24 @@ public class BstUtil {
         }
         return root;
     }
+
+    /**
+     * Removes a node from the Binary Search Tree.
+     *
+     * @param root  root of the BST
+     * @param value value of TreeNode to remove
+     * @return the found TreeNode or null BST does not contain such value
+     */
+    static TreeNode delete(TreeNode root, int value) {
+//        if (node != null) {
+//            if (hasNoChild(node)) {
+//                // deleteNodeFromParent
+//            } else if (hasOneChild(node)) {
+//                // replaceNodeWithItsOnlyChild
+//            } else {
+//                // deleteNodeWithTwoChildren
+//            }
+//        }
+        return root;
+    }
 }

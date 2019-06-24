@@ -223,4 +223,65 @@ class BstUtilTest {
         BstUtil.insert(root, 7);
         assertTrue(BstUtil.isValid(root));
     }
+
+    /*
+     *           5
+     *         /   \
+     *        2     6
+     *       / \     \
+     *      1   4     7
+     *         /
+     *        3
+     */
+    private TreeNode createTree() {
+        TreeNode root = new TreeNode(5);
+        BstUtil.insert(root, 2);
+        BstUtil.insert(root, 6);
+        BstUtil.insert(root, 1);
+        BstUtil.insert(root, 4);
+        BstUtil.insert(root, 7);
+        BstUtil.insert(root, 3);
+        return root;
+    }
+
+    @Test
+    void givenBst_whenDeleteNodeWithNoChild_thenNodeGetsDeleted() {
+        TreeNode bst = createTree();
+
+        BstUtil.delete(bst, 7);
+
+        assertTrue(BstUtil.isValid(bst));
+        assertNull(BstUtil.search(bst, 6).getRight());
+    }
+
+    @Test
+    void givenBst_whenDeleteNodeWithOneNoChild_thenNodeGetsReplaceWithChildren() {
+        TreeNode bst = createTree();
+
+        BstUtil.delete(bst, 6);
+        assertTrue(BstUtil.isValid(bst));
+        assertEquals(7, bst.getRight().getValue());
+    }
+
+    @Test
+    void givenBst_whenDeleteNodeWithTwoNoChildren_thenNodeGetsReplaceWithChildren() {
+        TreeNode bst = createTree();
+
+        BstUtil.delete(bst, 2);
+
+        assertTrue(BstUtil.isValid(bst));
+    }
+
+
+    @Test
+    void givenRandom() {
+        TreeNode bst = createTree();
+
+        BstUtil.delete(bst, 2);
+
+        assertTrue(BstUtil.isValid(bst));
+        assertEquals(3, BstUtil.search(bst, 5).getLeft().getValue());
+        assertEquals(4, BstUtil.search(bst, 3).getRight().getValue());
+        assertNull(BstUtil.search(bst, 4).getLeft());
+    }
 }
