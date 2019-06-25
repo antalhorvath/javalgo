@@ -13,7 +13,30 @@ package com.vathevor.javalgo.array;
  */
 public class HourGlassSum {
 
+    private static final int[][] HOURGLASS = new int[][]{
+            {1, 1, 1},
+            {0, 1, 0},
+            {1, 1, 1}
+    };
+
     static int hourglassSum(int[][] arr) {
-        return 42;
+        int max = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                int sum = getSumOfHourglassInPosition(arr, col, row);
+                max = max < sum ? sum : max;
+            }
+        }
+        return max;
+    }
+
+    static int getSumOfHourglassInPosition(int[][] arr, int x, int y) {
+        int sum = 0;
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                sum += arr[row + y][col + x] * HOURGLASS[row][col];
+            }
+        }
+        return sum;
     }
 }
