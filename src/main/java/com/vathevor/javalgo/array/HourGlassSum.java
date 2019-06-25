@@ -30,7 +30,7 @@ public class HourGlassSum {
         return max;
     }
 
-    static int getSumOfHourglassInPosition(int[][] arr, int x, int y) {
+    private static int getSumOfHourglassInPosition(int[][] arr, int x, int y) {
         int sum = 0;
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
