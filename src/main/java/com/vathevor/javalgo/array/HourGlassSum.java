@@ -20,7 +20,7 @@ public class HourGlassSum {
     };
 
     static int hourglassSum(int[][] arr) {
-        int max = 0;
+        int max = Integer.MIN_VALUE;
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
                 int sum = getSumOfHourglassInPosition(arr, col, row);
