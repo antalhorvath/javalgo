@@ -8,6 +8,22 @@ package com.vathevor.javalgo.array;
 public class MinimumSwaps {
 
     static int minimumSwaps(int[] arr) {
-        return 0;
+        int numberOfSwaps = 0;
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < arr.length - 1; i++) {
+                int number = arr[i];
+                if (number == i + 1) {
+                    continue;
+                }
+                sorted = false;
+                int temp = arr[number - 1];
+                arr[number - 1] = number;
+                arr[i] = temp;
+                numberOfSwaps++;
+            }
+        }
+        return numberOfSwaps;
     }
 }
