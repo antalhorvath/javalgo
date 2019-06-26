@@ -128,15 +128,44 @@ public class BstUtil {
      * @return the found TreeNode or null BST does not contain such value
      */
     static TreeNode delete(TreeNode root, int value) {
-//        if (node != null) {
-//            if (hasNoChild(node)) {
-//                // deleteNodeFromParent
-//            } else if (hasOneChild(node)) {
-//                // replaceNodeWithItsOnlyChild
-//            } else {
-//                // deleteNodeWithTwoChildren
-//            }
-//        }
+        // return null if root is null
+        if (root == null) {
+            return null;
+        }
+
+        // delete current node if root is the target node
+        if (root.getValue().equals(value)) {
+            // replace root with root->right if root->left is null
+            if (root.getLeft() == null) {
+                return root.getRight();
+            }
+
+            // replace root with root->left if root->right is null
+            if (root.getRight() == null) {
+                return root.getLeft();
+            }
+
+            // replace root with its successor if root has two children
+            TreeNode p = findSuccessor(root);
+            root.setValue(p.getValue());
+            root.setRight(delete(root.getRight(), p.getValue()));
+            return root;
+        }
+        if (root.getValue() < value) {
+            // find target in right subtree if root->val < key
+            root.setRight(delete(root.getRight(), value));
+        } else {
+            // find target in left subtree if root->val > key
+            root.setLeft(delete(root.getLeft(), value));
+        }
         return root;
+    }
+
+    private static TreeNode findSuccessor(TreeNode root) {
+        TreeNode current = root.getRight();
+        while (current != null && current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current;
     }
 }

@@ -271,17 +271,4 @@ class BstUtilTest {
 
         assertTrue(BstUtil.isValid(bst));
     }
-
-
-    @Test
-    void givenRandom() {
-        TreeNode bst = createTree();
-
-        BstUtil.delete(bst, 2);
-
-        assertTrue(BstUtil.isValid(bst));
-        assertEquals(3, BstUtil.search(bst, 5).getLeft().getValue());
-        assertEquals(4, BstUtil.search(bst, 3).getRight().getValue());
-        assertNull(BstUtil.search(bst, 4).getLeft());
-    }
 }
