@@ -17,6 +17,21 @@ public class LeftRotation {
      * @return
      */
     static int[] rotLeft(int[] a, int d) {
-        return new int[0];
+        int[] source = a;
+        int[] result = new int[a.length];
+
+        int tailLength = source.length - d;
+        int leadLength = d;
+
+        // start the new array with the last of the source
+        int sourceStartPosition = d;
+        int resultStartPosition = 0;
+        System.arraycopy(source, sourceStartPosition, result, resultStartPosition, tailLength);
+
+        // end the new array with the front elements of the source
+        sourceStartPosition = 0;
+        resultStartPosition = tailLength;
+        System.arraycopy(source, sourceStartPosition, result, resultStartPosition, leadLength);
+        return result;
     }
 }
