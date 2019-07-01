@@ -11,6 +11,24 @@ package com.vathevor.javalgo.array;
 public class ValidMountain {
 
     public boolean validMountainArray(int[] A) {
-        return false;
+        if (A.length < 3) {
+            return false;
+        }
+
+        int i = 0;
+
+        while (i + 1 < A.length && A[i] < A[i + 1]) {
+            i++;
+        }
+
+        if (i == 0) {
+            return false;
+        }
+
+        while (i + 1 < A.length && A[i + 1] < A[i]) {
+            i++;
+        }
+
+        return i == A.length - 1 && A[i] < A[i - 1];
     }
 }

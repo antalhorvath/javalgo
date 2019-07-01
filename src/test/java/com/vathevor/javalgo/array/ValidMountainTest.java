@@ -32,7 +32,9 @@ class ValidMountainTest {
         return Stream.of(
                 new TestCase(new int[]{2, 1}, false),
                 new TestCase(new int[]{3, 5, 5}, false),
-                new TestCase(new int[]{0, 3, 2, 1}, false)
+                new TestCase(new int[]{0, 3, 2, 1}, true),
+                new TestCase(new int[]{1, 3, 2}, true),
+                new TestCase(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, false)
         );
     }
 }
