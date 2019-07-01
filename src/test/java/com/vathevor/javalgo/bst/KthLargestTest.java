@@ -12,7 +12,7 @@ class KthLargestTest {
         int[] elements = {4, 5, 8, 2};
 
         KthLargest kthLargest = new KthLargest(k, elements);
-        
+
         assertEquals(4, kthLargest.add(3));
         assertEquals(5, kthLargest.add(5));
         assertEquals(5, kthLargest.add(10));
