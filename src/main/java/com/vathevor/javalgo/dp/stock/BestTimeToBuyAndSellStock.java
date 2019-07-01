@@ -20,6 +20,15 @@ package com.vathevor.javalgo.dp.stock;
 public class BestTimeToBuyAndSellStock {
 
     public int maxProfit(int[] prices) {
-        return 0;
+        int minPrice = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int price : prices) {
+            if (price < minPrice) {
+                minPrice = price;
+            } else if (profit < price - minPrice) {
+                profit = price - minPrice;
+            }
+        }
+        return profit;
     }
 }
