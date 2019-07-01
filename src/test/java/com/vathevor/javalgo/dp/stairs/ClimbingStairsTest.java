@@ -29,9 +29,18 @@ class ClimbingStairsTest {
         assertEquals(testCase.output, result);
     }
 
+    @ParameterizedTest
+    @MethodSource("testCases")
+    void testDpImplementation(TestCase testCase) {
+        ClimbingStairs underTest = new DpClimbingStairs();
+
+        int result = underTest.climbStairs(testCase.input);
+
+        assertEquals(testCase.output, result);
+    }
+
     static Stream<TestCase> testCases() {
         return Stream.of(
-                new TestCase(0, 1),
                 new TestCase(1, 1),
                 new TestCase(2, 2),
                 new TestCase(3, 3),
