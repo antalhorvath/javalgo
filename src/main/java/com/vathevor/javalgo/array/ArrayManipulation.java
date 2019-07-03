@@ -36,11 +36,11 @@ public class ArrayManipulation {
         }
 
         long max = 0;
-        long tmp = 0;
+        long current = 0;
         for (int i = 0; i < n; i++) {
-            tmp += steps[i];
-            if (max < tmp) {
-                max = tmp;
+            current += steps[i];
+            if (max < current) {
+                max = current;
             }
         }
         return max;

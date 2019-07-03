@@ -14,19 +14,23 @@ package com.vathevor.javalgo.array;
 public class MinimumBribes {
 
     static String getMinimumBribes(int[] q) {
-        int minimumBribes = 0;
+        int numberOfBribes = 0;
         for (int i = 0; i < q.length; i++) {
-            int shift = q[i] - (i + 1);
-            if (2 < shift) {
+            int currentIndexOfPerson = q[i];
+            int originalIndexOfPerson = i + 1;
+            int numberOfBribesDoneByPerson = currentIndexOfPerson - originalIndexOfPerson;
+            if (2 < numberOfBribesDoneByPerson) {
                 return "Too chaotic";
             }
-            for (int j = Math.max(0, q[i] - 2); j < i; j++) {
-                if (q[i] < q[j]) {
-                    minimumBribes++;
+            int twoPositionsBeforeTheCurrentIndexOfPerson = Math.max(0, currentIndexOfPerson - 2);
+            for (int j = twoPositionsBeforeTheCurrentIndexOfPerson; j < i; j++) {
+                int indexOfPersonBeforeThem = q[j];
+                if (currentIndexOfPerson < indexOfPersonBeforeThem) {
+                    numberOfBribes++;
                 }
             }
         }
-        return String.valueOf(minimumBribes);
+        return String.valueOf(numberOfBribes);
     }
 }
 
