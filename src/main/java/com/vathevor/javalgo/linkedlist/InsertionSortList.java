@@ -21,6 +21,23 @@ public class InsertionSortList {
     }
 
     public ListNode insertionSortList(ListNode head) {
-        return null;
+        ListNode headOfResult = new ListNode(0);
+        ListNode currentNode = head;
+        ListNode nextNode;
+
+        while (currentNode != null) {
+            nextNode = currentNode.next;
+
+            ListNode iteratorNode = headOfResult;
+            while (iteratorNode.next != null && iteratorNode.next.val < currentNode.val) {
+                iteratorNode = iteratorNode.next;
+            }
+
+            currentNode.next = iteratorNode.next;
+            iteratorNode.next = currentNode;
+            currentNode = nextNode;
+        }
+
+        return headOfResult.next;
     }
 }
