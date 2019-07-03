@@ -1,5 +1,7 @@
 package com.vathevor.javalgo.sort;
 
+import java.util.Arrays;
+
 /*
  * Given two strings s and t , write a function to determine if t is an anagram of s.
  *
@@ -15,6 +17,13 @@ package com.vathevor.javalgo.sort;
 public class ValidAnagram {
 
     public boolean isAnagram(String s, String t) {
-        return false;
+        if (s.length() != t.length()) {
+            return false;
+        }
+        char[] lettersOfS = s.toCharArray();
+        char[] lettersOfT = s.toCharArray();
+        Arrays.sort(lettersOfS);
+        Arrays.sort(lettersOfT);
+        return Arrays.equals(lettersOfS, lettersOfT);
     }
 }
