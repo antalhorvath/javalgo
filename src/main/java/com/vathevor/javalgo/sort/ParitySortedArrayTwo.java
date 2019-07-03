@@ -17,6 +17,35 @@ package com.vathevor.javalgo.sort;
 public class ParitySortedArrayTwo {
 
     public int[] sortArrayByParityII(int[] A) {
-        return null;
+        if (A.length < 2) return A;
+        for (int i = 0; i < A.length; i++) {
+            if (i % 2 == 0) {
+                if (A[i] % 2 != 0) {
+                    for (int j = i + 1; j < A.length; j++) {
+                        if (A[j] % 2 == 0) {
+                            swap(A, i, j);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                if (A[i] % 2 == 0) {
+                    for (int j = i + 1; j < A.length; j++) {
+                        if (A[j] % 2 != 0) {
+                            swap(A, i, j);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+        return A;
+    }
+
+    private void swap(int[] A, int i, int j) {
+        A[i] = A[i] + A[j];
+        A[j] = A[i] - A[j];
+        A[i] = A[i] - A[j];
     }
 }
