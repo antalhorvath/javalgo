@@ -2,6 +2,7 @@ package com.vathevor.javalgo.sort;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidAnagramTest {
@@ -15,6 +16,6 @@ class ValidAnagramTest {
 
     @Test
     void shouldReturnFalse() {
-        assertTrue(underTest.isAnagram("rat", "car"));
+        assertFalse(underTest.isAnagram("rat", "car"));
     }
 }

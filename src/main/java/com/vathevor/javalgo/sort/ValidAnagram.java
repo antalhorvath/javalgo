@@ -21,7 +21,7 @@ public class ValidAnagram {
             return false;
         }
         char[] lettersOfS = s.toCharArray();
-        char[] lettersOfT = s.toCharArray();
+        char[] lettersOfT = t.toCharArray();
         Arrays.sort(lettersOfS);
         Arrays.sort(lettersOfT);
         return Arrays.equals(lettersOfS, lettersOfT);
