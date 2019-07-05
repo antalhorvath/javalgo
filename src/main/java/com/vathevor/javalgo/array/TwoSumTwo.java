@@ -1,5 +1,13 @@
 package com.vathevor.javalgo.array;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Collections.singletonList;
+
 /*
  * Given an array of integers that is already sorted in ascending order,
  * find two numbers such that they add up to a specific target number.
@@ -21,6 +29,33 @@ package com.vathevor.javalgo.array;
 public class TwoSumTwo {
 
     public int[] twoSum(int[] numbers, int target) {
-        return null;
+        Map<Integer, List<Integer>> numberWithIndexMap = new HashMap<>();
+
+        for (int i = 0; i < numbers.length; i++) {
+            int number = numbers[i];
+            if (numberWithIndexMap.containsKey(number)) {
+                numberWithIndexMap.get(number).add(i + 1);
+            } else {
+                List<Integer> updatedIndexes = new ArrayList<>(singletonList(i + 1));
+                numberWithIndexMap.put(number, updatedIndexes);
+            }
+        }
+
+        for (Integer number : numberWithIndexMap.keySet()) {
+            int remainder = target - number;
+            if (numberWithIndexMap.containsKey(remainder)) {
+                List<Integer> numberPositions = numberWithIndexMap.get(number);
+                List<Integer> remainderPositions = numberWithIndexMap.get(remainder);
+                int[] result;
+                if (numberPositions.equals(remainderPositions) && numberPositions.size() > 1) {
+                    result = new int[]{numberPositions.get(0), numberPositions.get(1)};
+                } else {
+                    result = new int[]{numberPositions.get(0), remainderPositions.get(0)};
+                }
+                Arrays.sort(result);
+                return result;
+            }
+        }
+        return new int[0];
     }
 }
