@@ -1,10 +1,12 @@
 package com.vathevor.javalgo.sort;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
 
 /*
  * The company is about to release a new order prioritization algorithm.
@@ -29,31 +31,21 @@ import java.util.stream.Collectors;
  */
 public class AmazonOrdering {
 
-    private static final Predicate<String> PREMIUM_ORDER = order -> {
-        int indexOfFirstSpace = order.indexOf(" ");
-        String metadata = order.substring(indexOfFirstSpace + 1);
-        return metadata.matches("[a-z ]*");
-    };
+    private static final Predicate<String> PREMIUM_ORDER = order -> getMetadata(order).matches("[a-z ]*");
 
-    private static final Comparator<String> BY_METADATA_THEN_ID = (o1, o2) -> {
-        int indexOfFirstSpaceInO1 = o1.indexOf(" ");
-        String metadataOfO1 = o1.substring(indexOfFirstSpaceInO1 + 1);
-        int indexOfFirstSpaceInO2 = o2.indexOf(" ");
-        String metadataOfO2 = o1.substring(indexOfFirstSpaceInO2 + 1);
-        int compareResult = metadataOfO1.compareTo(metadataOfO2);
-        return compareResult != 0 ? compareResult : o1.compareTo(o2);
-    };
+    private static final Comparator<String> BY_METADATA_THEN_ID =
+            comparing(AmazonOrdering::getMetadata)
+                    .thenComparing(order -> order);
+
+    private static String getMetadata(String order) {
+        int indexOfFirstSpace = order.indexOf(" ");
+        return order.substring(indexOfFirstSpace + 1);
+    }
 
     public List<String> getPrioritizedOrders(int numOrders, List<String> orderList) {
-
-        List<String> result = orderList.stream()
-                .filter(PREMIUM_ORDER)
-                .sorted(BY_METADATA_THEN_ID)
-                .collect(Collectors.toList());
-
-        List<String> orders = new ArrayList<>(orderList);
-        orders.removeAll(result);
-        result.addAll(orders);
-        return result;
+        return Stream.concat(
+                orderList.stream().filter(PREMIUM_ORDER).sorted(BY_METADATA_THEN_ID),
+                orderList.stream().filter(PREMIUM_ORDER.negate())
+        ).collect(Collectors.toList());
     }
 }
