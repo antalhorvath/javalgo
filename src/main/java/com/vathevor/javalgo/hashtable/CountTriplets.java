@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 /*
  * You are given an array and you need to find number of tripets of indices (i,j,k)
@@ -39,43 +40,37 @@ public class CountTriplets {
             return binomialCoeff(arr.size(), 3);
         }
 
-        int count = 0;
+        long count = 0;
         Map<Long, List<Integer>> valuesWithIdexes = arr.stream()
                 .distinct()
-                .collect(Collectors.toMap(Function.identity(), value -> {
-                    int i = 0;
-                    long number;
+                .collect(toMap(Function.identity(), value -> {
                     List<Integer> indexes = new ArrayList<>();
-                    do {
-                        number = arr.get(i);
+                    for (int i = 0; i < arr.size(); i++) {
+                        Long number = arr.get(i);
                         if (value.equals(number)) {
                             indexes.add(i);
                         }
-                        i++;
-                    } while (i < arr.size() && number <= value);
+                    }
                     return indexes;
                 }));
 
-        for (int i = 0; i < arr.size() - 2; i++) {
+        for (int i = 0; i < arr.size(); i++) {
             long ni = arr.get(i);
             long nj = ni * r;
             long nk = nj * r;
 
-            if (r == 1) {
+            List<Integer> indexesOfNj = valuesWithIdexes.get(nj);
+            List<Integer> indexesOfNk = valuesWithIdexes.get(nk);
+
+            if (indexesOfNj != null && indexesOfNk != null) {
                 int currentIndex = i;
-                long numberOfIdenticalValue = valuesWithIdexes.get(nj)
-                        .stream()
+                long countOfIndexesOfNj = indexesOfNj.stream()
                         .filter(index -> currentIndex < index)
                         .count();
-                count += (numberOfIdenticalValue * (numberOfIdenticalValue - 1)) / 2;
-            } else {
-                List<Integer> indexesOfNj = valuesWithIdexes.get(nj);
-                List<Integer> indexesOfNk = valuesWithIdexes.get(nk);
-                if (indexesOfNj != null && indexesOfNk != null) {
-                    long countOfNj = indexesOfNj.size();
-                    long countOfNk = indexesOfNk.size();
-                    count += countOfNj * countOfNk;
-                }
+                long longCountOfIndexesOfNk = indexesOfNk.stream()
+                        .filter(index -> currentIndex < index)
+                        .count();
+                count += countOfIndexesOfNj * longCountOfIndexesOfNk;
             }
         }
 
