@@ -67,7 +67,7 @@ class CountTripletsTest {
     }
 
     private List<Long> readFromFile() {
-        Path path = null;
+        Path path;
         try {
             path = Paths.get(getClass().getClassLoader()
                     .getResource("com.vathevor.javalgo.hashtable/large_input.txt")
