@@ -2,7 +2,15 @@ package com.vathevor.javalgo.hashtable;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import static com.vathevor.javalgo.hashtable.CountTriplets.countTriplets;
@@ -43,11 +51,36 @@ class CountTripletsTest {
     }
 
     @Test
-    void name() {
+    void testCase5() {
         List<Long> numbers = LongStream.generate(() -> 1237L).boxed()
                 .limit(100000)
                 .collect(toList());
 
         assertEquals(166661666700000L, countTriplets(numbers, 1));
     }
+
+    @Test
+    void testCase6() {
+        List<Long> numbers = readFromFile();
+
+        assertEquals(2325652489L, countTriplets(numbers, 3));
+    }
+
+    private List<Long> readFromFile() {
+        Path path = null;
+        try {
+            path = Paths.get(getClass().getClassLoader()
+                    .getResource("com.vathevor.javalgo.hashtable/large_input.txt")
+                    .toURI());
+
+            return Files.lines(path)
+                    .flatMap(line -> Arrays.stream(line.split(" ")))
+                    .map(Long::valueOf)
+                    .collect(Collectors.toList());
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+
 }
