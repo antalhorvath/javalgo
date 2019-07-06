@@ -1,5 +1,9 @@
 package com.vathevor.javalgo.hashtable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /*
  * Two strings are anagrams of each other
  * if the letters of one string can be rearranged to form the other string.
@@ -17,7 +21,25 @@ package com.vathevor.javalgo.hashtable;
 public class SherlockAndAnagrams {
 
     static int sherlockAndAnagrams(String s) {
+        List<String> substrings = new ArrayList<>();
+        for (int i = 0; i <= s.length() - 1; i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                char[] lettersOfSubstring = s.substring(i, j).toCharArray();
+                Arrays.sort(lettersOfSubstring);
+                substrings.add(new String(lettersOfSubstring));
+            }
+        }
 
-        return 0;
+        int counter = 0;
+        for (int i = 0; i < substrings.size() - 1; i++) {
+            String substring = substrings.get(i);
+            for (int j = i + 1; j < substrings.size(); j++) {
+                String test = substrings.get(j);
+                if(substring.equals(test)) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 }
