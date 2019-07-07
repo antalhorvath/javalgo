@@ -1,7 +1,9 @@
 package com.vathevor.javalgo.hashtable;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  * You are given q queries. Each query is of the form two integers described below:
@@ -54,6 +56,37 @@ public class FrequencyQueries {
      * 0 if there is not.
      */
     static List<Integer> freqQuery(List<List<Integer>> queries) {
-        return Collections.emptyList();
+        Map<Integer, Integer> frequencies = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for (List<Integer> query : queries) {
+            Integer operation = query.get(0);
+            Integer value = query.get(1);
+
+            switch (operation) {
+                case 1:
+                    insert(frequencies, value);
+                    break;
+                case 2:
+                    delete(frequencies, value);
+                    break;
+                case 3:
+                    result.add(containsNumberWithFrequency(frequencies, value));
+                    break;
+            }
+        }
+        return result;
+    }
+
+    private static void insert(Map<Integer, Integer> frequencies, Integer value) {
+        frequencies.computeIfPresent(value, (key, oldValue) -> ++oldValue);
+        frequencies.putIfAbsent(value, 1);
+    }
+
+    private static void delete(Map<Integer, Integer> frequencies, Integer value) {
+        frequencies.computeIfPresent(value, (key, oldValue) -> 0 < oldValue - 1 ? --oldValue : null);
+    }
+
+    private static Integer containsNumberWithFrequency(Map<Integer, Integer> frequencies, Integer frequency) {
+        return frequencies.values().contains(frequency) ? 1 : 0;
     }
 }
