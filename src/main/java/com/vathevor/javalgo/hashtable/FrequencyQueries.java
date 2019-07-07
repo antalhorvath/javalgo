@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /*
  * You are given q queries. Each query is of the form two integers described below:
@@ -49,7 +50,11 @@ import java.util.Map;
  */
 public class FrequencyQueries {
 
-    private static final Map<Integer, Integer> FREQUENCIES = new HashMap<>();
+    private static Long getMaxFrequency(List<int[]> queries) {
+        return queries.parallelStream()
+                .filter(query -> query[0] == 1)
+                .count();
+    }
 
     /**
      * @param queries
@@ -58,48 +63,47 @@ public class FrequencyQueries {
      * 0 if there is not.
      */
     static List<Integer> freqQuery(List<int[]> queries) {
-        long maxFrequency = getMaxFrequency(queries);
 
+        long maxFrequency = getMaxFrequency(queries);
+        FrequencyCounter frequencyCounter = new FrequencyCounter();
         List<Integer> result = new ArrayList<>();
+
+        Consumer<Integer> frequencyChecker = frequency -> {
+            if (maxFrequency < frequency || queries.size() < frequency) {
+                result.add(0);
+            } else {
+                result.add(frequencyCounter.containsNumberWithFrequency(frequency));
+            }
+        };
+
+        Map<Integer, Consumer<Integer>> operations = new HashMap<>();
+        operations.put(1, frequencyCounter::insert);
+        operations.put(2, frequencyCounter::delete);
+        operations.put(3, frequencyChecker);
+
         for (int[] query : queries) {
             int operation = query[0];
             int value = query[1];
-
-            switch (operation) {
-                case 1:
-                    insert(value);
-                    break;
-                case 2:
-                    delete(value);
-                    break;
-                case 3:
-                    if (maxFrequency < value || queries.size() < value) {
-                        result.add(0);
-                    } else {
-                        result.add(containsNumberWithFrequency(value));
-                    }
-                    break;
-            }
+            operations.get(operation).accept(value);
         }
         return result;
     }
 
-    private static void insert(Integer value) {
-        FREQUENCIES.computeIfPresent(value, (key, oldValue) -> ++oldValue);
-        FREQUENCIES.putIfAbsent(value, 1);
-    }
+    private static class FrequencyCounter {
 
-    private static void delete(Integer value) {
-        FREQUENCIES.computeIfPresent(value, (key, oldValue) -> 0 < oldValue - 1 ? --oldValue : null);
-    }
+        private final Map<Integer, Integer> frequencies = new HashMap<>();
 
-    private static Integer containsNumberWithFrequency(Integer frequency) {
-        return FREQUENCIES.values().contains(frequency) ? 1 : 0;
-    }
+        private void insert(Integer value) {
+            frequencies.computeIfPresent(value, (key, oldValue) -> ++oldValue);
+            frequencies.putIfAbsent(value, 1);
+        }
 
-    private static Long getMaxFrequency(List<int[]> queries) {
-        return queries.parallelStream()
-                .filter(query -> query[0] == 1)
-                .count();
+        private void delete(Integer value) {
+            frequencies.computeIfPresent(value, (key, oldValue) -> 0 < oldValue - 1 ? --oldValue : null);
+        }
+
+        private Integer containsNumberWithFrequency(Integer frequency) {
+            return frequencies.values().contains(frequency) ? 1 : 0;
+        }
     }
 }
