@@ -37,15 +37,18 @@ public class CountTriplets {
         Map<Long, Long> counter = new HashMap<>();
         long count = 0;
         for (Long number : arr) {
-            long key = number / r;
+            if (number % r == 0) {
+                long key = number / r;
 
-            if (counter.containsKey(key) && number % r == 0) {
-                count += counter.get(key);
-            }
+                if (counter.containsKey(key)) {
+                    count += counter.get(key);
+                }
 
-            if (potential.containsKey(key) && number % r == 0) {
-                long c = potential.get(key);
-                counter.put(number, counter.getOrDefault(number, 0L) + c);
+                if (potential.containsKey(key)) {
+                    Long originalValue = counter.getOrDefault(number, 0L);
+                    long incrementValue = potential.get(key);
+                    counter.put(number, originalValue + incrementValue);
+                }
             }
 
             potential.put(number, potential.getOrDefault(number, 0L) + 1);
