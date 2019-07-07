@@ -49,44 +49,57 @@ import java.util.Map;
  */
 public class FrequencyQueries {
 
+    private static final Map<Integer, Integer> FREQUENCIES = new HashMap<>();
+
     /**
      * @param queries
      * @return returns a list of integers where each element is:
      * 1 if there is at least one element value with the queried number of occurrences in the current array
      * 0 if there is not.
      */
-    static List<Integer> freqQuery(List<List<Integer>> queries) {
-        Map<Integer, Integer> frequencies = new HashMap<>();
+    static List<Integer> freqQuery(List<int[]> queries) {
+        long maxFrequency = getMaxFrequency(queries);
+
         List<Integer> result = new ArrayList<>();
-        for (List<Integer> query : queries) {
-            Integer operation = query.get(0);
-            Integer value = query.get(1);
+        for (int[] query : queries) {
+            int operation = query[0];
+            int value = query[1];
 
             switch (operation) {
                 case 1:
-                    insert(frequencies, value);
+                    insert(value);
                     break;
                 case 2:
-                    delete(frequencies, value);
+                    delete(value);
                     break;
                 case 3:
-                    result.add(containsNumberWithFrequency(frequencies, value));
+                    if (maxFrequency < value || queries.size() < value) {
+                        result.add(0);
+                    } else {
+                        result.add(containsNumberWithFrequency(value));
+                    }
                     break;
             }
         }
         return result;
     }
 
-    private static void insert(Map<Integer, Integer> frequencies, Integer value) {
-        frequencies.computeIfPresent(value, (key, oldValue) -> ++oldValue);
-        frequencies.putIfAbsent(value, 1);
+    private static void insert(Integer value) {
+        FREQUENCIES.computeIfPresent(value, (key, oldValue) -> ++oldValue);
+        FREQUENCIES.putIfAbsent(value, 1);
     }
 
-    private static void delete(Map<Integer, Integer> frequencies, Integer value) {
-        frequencies.computeIfPresent(value, (key, oldValue) -> 0 < oldValue - 1 ? --oldValue : null);
+    private static void delete(Integer value) {
+        FREQUENCIES.computeIfPresent(value, (key, oldValue) -> 0 < oldValue - 1 ? --oldValue : null);
     }
 
-    private static Integer containsNumberWithFrequency(Map<Integer, Integer> frequencies, Integer frequency) {
-        return frequencies.values().contains(frequency) ? 1 : 0;
+    private static Integer containsNumberWithFrequency(Integer frequency) {
+        return FREQUENCIES.values().contains(frequency) ? 1 : 0;
+    }
+
+    private static Long getMaxFrequency(List<int[]> queries) {
+        return queries.parallelStream()
+                .filter(query -> query[0] == 1)
+                .count();
     }
 }

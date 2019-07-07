@@ -12,14 +12,14 @@ class FrequencyQueriesTest {
 
     @Test
     void testCase1() {
-        List<List<Integer>> queries = asList(
-                asList(1, 1),
-                asList(2, 2),
-                asList(3, 2),
-                asList(1, 1),
-                asList(1, 1),
-                asList(2, 1),
-                asList(3, 2)
+        List<int[]> queries = asList(
+                new int[]{1, 1},
+                new int[]{2, 2},
+                new int[]{3, 2},
+                new int[]{1, 1},
+                new int[]{1, 1},
+                new int[]{2, 1},
+                new int[]{3, 2}
         );
 
         assertEquals(asList(0, 1), freqQuery(queries));
@@ -27,15 +27,15 @@ class FrequencyQueriesTest {
 
     @Test
     void testCase2() {
-        List<List<Integer>> queries = asList(
-                asList(1, 5),
-                asList(1, 6),
-                asList(3, 2),
-                asList(1, 10),
-                asList(1, 10),
-                asList(1, 6),
-                asList(2, 5),
-                asList(3, 2)
+        List<int[]> queries = asList(
+                new int[]{1, 5},
+                new int[]{1, 6},
+                new int[]{3, 2},
+                new int[]{1, 10},
+                new int[]{1, 10},
+                new int[]{1, 6},
+                new int[]{2, 5},
+                new int[]{3, 2}
         );
 
         assertEquals(asList(0, 1), freqQuery(queries));
@@ -43,11 +43,11 @@ class FrequencyQueriesTest {
 
     @Test
     void testCase3() {
-        List<List<Integer>> queries = asList(
-                asList(3, 4),
-                asList(2, 1003),
-                asList(1, 16),
-                asList(3, 1)
+        List<int[]> queries = asList(
+                new int[]{3, 4},
+                new int[]{2, 1003},
+                new int[]{1, 16},
+                new int[]{3, 1}
         );
 
         assertEquals(asList(0, 1), freqQuery(queries));
@@ -55,17 +55,17 @@ class FrequencyQueriesTest {
 
     @Test
     void testCase4() {
-        List<List<Integer>> queries = asList(
-                asList(1, 3),
-                asList(2, 3),
-                asList(3, 2),
-                asList(1, 4),
-                asList(1, 5),
-                asList(1, 5),
-                asList(1, 4),
-                asList(3, 2),
-                asList(2, 4),
-                asList(3, 2)
+        List<int[]> queries = asList(
+                new int[]{1, 3},
+                new int[]{2, 3},
+                new int[]{3, 2},
+                new int[]{1, 4},
+                new int[]{1, 5},
+                new int[]{1, 5},
+                new int[]{1, 4},
+                new int[]{3, 2},
+                new int[]{2, 4},
+                new int[]{3, 2}
         );
 
         assertEquals(asList(0, 1, 1), freqQuery(queries));
