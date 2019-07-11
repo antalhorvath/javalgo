@@ -1,5 +1,7 @@
 package com.vathevor.javalgo.sort;
 
+import java.util.Arrays;
+
 /*
  * Mark and Jane are very happy after having their first child.
  * Their son loves toys, so Mark wants to buy some.
@@ -27,6 +29,13 @@ public class MarkAndToys {
      * @return integer representing the maximum number of toys Mark can purchase
      */
     static int maximumToys(int[] prices, int k) {
-        return 0;
+        Arrays.sort(prices);
+        int numberOfToys = 0;
+        int indexOfToy = 0;
+        while (0 < (k -= prices[indexOfToy])) {
+            numberOfToys++;
+            indexOfToy++;
+        }
+        return numberOfToys;
     }
 }
