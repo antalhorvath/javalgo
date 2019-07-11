@@ -13,17 +13,23 @@ public class BubbleSort {
     // Complete the countSwaps function below. It should print the three lines required, then return.
     static void countSwaps(int[] a) {
         int n = a.length;
+        int numberOfSwaps = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n - 1; j++) {
-                // Swap adjacent elements if they are in decreasing order
-                if (a[j] > a[j + 1]) {
+                if (a[j + 1] < a[j]) {
                     swap(a, j, j + 1);
+                    numberOfSwaps++;
                 }
             }
         }
+        System.out.printf("Array is sorted in %d swaps.\n", numberOfSwaps);
+        System.out.printf("First Element: %d\n", a[0]);
+        System.out.printf("Last Element: %d\n", a[a.length - 1]);
     }
 
     static void swap(int[] a, int i, int j) {
-
+        a[i] += a[j];
+        a[j] = a[i] - a[j];
+        a[i] -= a[j];
     }
 }
