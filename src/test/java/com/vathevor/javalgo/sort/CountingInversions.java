@@ -16,46 +16,47 @@ public class CountingInversions {
      * @return an integer representing the number of inversions required to sort the array
      */
     static long countInversions(int[] arr) {
-        int[] temp = new int[arr.length];
-        return mergeSort(arr, temp, 0, arr.length - 1);
+        return mergeSort(arr, 0, arr.length - 1);
     }
 
-    static Long mergeSort(int[] arr, int[] temp, int start, int end) {
+    static Long mergeSort(int[] arr, int start, int end) {
         long count = 0;
         if (start < end) {
-            int mid = (start + end) / 2;
-            count = mergeSort(arr, temp, start, mid);
-            count += mergeSort(arr, temp, mid + 1, end);
-            count += merge(arr, temp, start, mid + 1, end);
+            int middle = (start + end) / 2;
+            count = mergeSort(arr, start, middle);
+            count += mergeSort(arr, middle + 1, end);
+            count += merge(arr, start, middle + 1, end);
         }
         return count;
     }
 
-    static int merge(int[] arr, int[] temp, int start, int middle, int end) {
-        int count = 0;
+    static long merge(int[] array, int start, int middle, int end) {
+        long count = 0;
+
         int i = start;
         int j = middle;
-        int k = start;
+        int k = 0;
 
+        int[] temp = new int[end - start + 1];
         while ((i <= middle - 1) && (j <= end)) {
-            if (arr[i] <= arr[j]) {
-                temp[k++] = arr[i++];
+            if (array[i] <= array[j]) {
+                temp[k++] = array[i++];
             } else {
-                temp[k++] = arr[j++];
+                temp[k++] = array[j++];
                 count = count + (middle - i);
             }
         }
 
         while (i <= middle - 1) {
-            temp[k++] = arr[i++];
+            temp[k++] = array[i++];
         }
 
         while (j <= end) {
-            temp[k++] = arr[j++];
+            temp[k++] = array[j++];
         }
 
         for (i = start; i <= end; i++) {
-            arr[i] = temp[i];
+            array[i] = temp[i - start];
         }
 
         return count;
