@@ -20,7 +20,64 @@ public class SpecialPalindrome {
      * @param s string
      * @return an integer representing the number of special substrings that can be formed from the given string
      */
+
     static long substrCount(int n, String s) {
-        return 0;
+        char[] sequence = s.toCharArray();
+
+        long count = 0;
+        nextStartingPosition:
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j <= n; j++) {
+                if (isSpecial(sequence, i, j)) {
+                    count++;
+                    continue;
+                }
+                if (isSubstringWithOddLength(i, j)) {
+                    if (isOddlySpecial(sequence, i, j)) {
+                        count++;
+                        continue nextStartingPosition;
+                    }
+                }
+                if (isDeadEnd(sequence, i, j)) continue nextStartingPosition;
+            }
+        }
+
+        return count;
+    }
+
+    private static boolean isSubstringWithOddLength(int i, int j) {
+        return (j - i) % 2 == 1;
+    }
+
+    private static boolean isSpecial(char[] sequence, int i, int j) {
+        char r = sequence[i];
+        // find any mismatch
+        for (int k = i + 1; k < j; k++)
+            if (sequence[k] != r) return false;
+
+        return true;
+    }
+
+    private static boolean isOddlySpecial(char[] sequence, int i, int j) {
+        char r = sequence[i];
+        int middle = i + ((j - i) / 2);
+        // find mismatch in the first part before middle
+        for (int k = i + 1; k < middle; k++)
+            if (sequence[k] != r) return false;
+        // find mismatch in the last part after middle
+        for (int k = middle + 1; k < j; k++)
+            if (sequence[k] != r) return false;
+
+        return true;
+    }
+
+    private static boolean isDeadEnd(char[] sequence, int i, int j) {
+        char r = sequence[i];
+        int differences = 0;
+        // find mismatch to be sure that sequence will not be special if extended
+        for (int k = i + 1; k < j; k++)
+            if (sequence[k] != r && 1 < ++differences) return true;
+
+        return false;
     }
 }
