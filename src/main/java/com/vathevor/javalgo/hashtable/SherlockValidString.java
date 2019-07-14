@@ -1,5 +1,13 @@
 package com.vathevor.javalgo.hashtable;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+
 /*
  * Sherlock considers a string to be valid if all characters of the string appear the same number of times.
  * It is also valid if he can remove just 1 character from the string,
@@ -32,6 +40,44 @@ package com.vathevor.javalgo.hashtable;
 public class SherlockValidString {
 
     static boolean isValid(String s) {
-        return false;
+        Map<String, Long> countsByLetter = Arrays.stream(s.split(""))
+                .collect(groupingBy(identity(), counting()));
+
+        Map<Long, Long> countsByFrequency = countsByLetter.values().stream()
+                .collect(groupingBy(identity(), counting()));
+
+        // all letters occur with same frequency
+        if (1 == countsByFrequency.keySet().size()) {
+            return true;
+        }
+
+        // there are more than two kind of frequencies
+        if (2 < countsByFrequency.keySet().size()) {
+            return false;
+        }
+
+        Iterator<Long> frequencyIterator = countsByFrequency.keySet().iterator();
+
+        Long frequency1 = frequencyIterator.next();
+        Long frequencyCount1 = countsByFrequency.get(frequency1);
+        // if there is a single frequency with one count that could be removed
+        if (frequency1 == 1 && frequencyCount1 == 1) {
+            return true;
+        }
+
+        Long frequency2 = frequencyIterator.next();
+        Long frequencyCount2 = countsByFrequency.get(frequency2);
+        // if there is a single frequency with one count that could be removed
+        if (frequency2 == 1 && frequencyCount2 == 1) {
+            return true;
+        }
+
+        // if difference between frequencies is more than 1 then it cannot be resolved
+        if (1 < Math.abs(frequency1 - frequency2)) {
+            return false;
+        }
+
+        // one of them could be removed
+        return frequencyCount1 == 1 || frequencyCount2 == 1;
     }
 }
