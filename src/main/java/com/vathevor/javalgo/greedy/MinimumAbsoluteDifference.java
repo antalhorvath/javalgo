@@ -1,5 +1,7 @@
 package com.vathevor.javalgo.greedy;
 
+import java.util.Arrays;
+
 /*
  * Consider an array of integers, arr=[0, 1, ... n].
  * We define the absolute difference between two elements,
@@ -16,11 +18,22 @@ package com.vathevor.javalgo.greedy;
 public class MinimumAbsoluteDifference {
 
     /**
-     *
      * @param arr
      * @return an integer that represents the minimum absolute difference between any pair of elements
      */
     static int minimumAbsoluteDifference(int[] arr) {
-        return 0;
+        if (arr.length < 2) return 0;
+        Arrays.sort(arr);
+        int diffMin = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.length - 1; i++) {
+            int diff = Math.abs(arr[i] - arr[i+1]);
+            if(diff == 0) {
+                return 0;
+            }
+            if (diff < diffMin) {
+                diffMin = diff;
+            }
+        }
+        return diffMin;
     }
 }
