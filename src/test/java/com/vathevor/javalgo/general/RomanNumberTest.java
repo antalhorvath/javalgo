@@ -11,7 +11,7 @@ class RomanNumberTest {
 
     @ParameterizedTest
     @MethodSource("testCases")
-    void test(TestCase testCase) {
+    void testIntegerToRoman(TestCase testCase) {
         RomanNumber actual = RomanNumber.valueOf(testCase.integer);
 
         assertEquals(testCase.romanNumber, actual.getValue());
